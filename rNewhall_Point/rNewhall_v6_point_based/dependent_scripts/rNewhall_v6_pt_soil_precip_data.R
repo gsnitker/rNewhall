@@ -19,12 +19,12 @@ soil.data.sub = subset(soil.data, Site==site & Sand != -9.9)
 
 
 # Process all necessary soil data from OK Mesonet
-AWS.mesonet = (soil.data.sub$Th33 - soil.data.sub$Th1500) * row.depth  # Only ten here due to the fact it is a 10 cm slice of soil; now this is cm3 / 10 cm3
-BD.mesonet = soil.data.sub$BulkD * row.depth # Only ten here due to the fact it is a 10 cm slice of soil; now this is cm3 / 10 cm3
-WC.033.mesonet = soil.data.sub$Th33 * row.depth  # Only ten here due to the fact it is a 10 cm slice of soil; now this is cm3 / 10 cm3
-WC.15.mesonet = soil.data.sub$Th1500 * row.depth  # Only ten here due to the fact it is a 10 cm slice of soil; now this is cm3 / 10 cm3
-WC.sat.mesonet  = soil.data.sub$Theta_s  * row.depth # Only ten here due to the fact it is a 10 cm slice of soil; now this is cm3 / 10 cm3
-WC.ret.mesonet = soil.data.sub$Theta_r * row.depth # Only ten here due to the fact it is a 10 cm slice of soil; now this is cm3 / 10 cm3
+AWS.mesonet = (soil.data.sub$Th33 - soil.data.sub$Th1500) * row.depth  
+BD.mesonet = soil.data.sub$BulkD 
+WC.033.mesonet = soil.data.sub$Th33 
+WC.15.mesonet = soil.data.sub$Th1500  
+WC.sat.mesonet  = soil.data.sub$Theta_s   
+WC.ret.mesonet = soil.data.sub$Theta_r
 Ksat.mesonet = soil.data.sub$Ks 
 L.mesonet = soil.data.sub$L
 N.mesonet = soil.data.sub$N
