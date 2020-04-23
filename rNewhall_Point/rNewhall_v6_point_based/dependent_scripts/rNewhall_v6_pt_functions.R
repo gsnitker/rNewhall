@@ -129,16 +129,16 @@ rNewhall.pt.daily =  function(d){
   
 
   # 2.5 Assess the mositure in specified row 
-  vol.moisture.0.10 = (sum(mm.matrix.val[1,])/sum(mm.matrix.max[1,1:11])) * ((WC.sat[1] - WC.15[1]) + WC.15[1])/100
-  vol.moisture.10.20 = (sum(mm.matrix.val[2,])/sum(mm.matrix.max[2,1:11])) * ((WC.sat[2] - WC.15[2]) + WC.15[2])/100
-  vol.moisture.20.30 = (sum(mm.matrix.val[3,])/sum(mm.matrix.max[3,1:11])) * ((WC.sat[3] - WC.15[3]) + WC.15[3])/100
-  vol.moisture.30.40 = (sum(mm.matrix.val[4,])/sum(mm.matrix.max[4,1:11])) * ((WC.sat[4] - WC.15[4]) + WC.15[4])/100
-  vol.moisture.40.50 = (sum(mm.matrix.val[5,])/sum(mm.matrix.max[5,1:11])) * ((WC.sat[5] - WC.15[5]) + WC.15[5])/100
-  vol.moisture.50.60 = (sum(mm.matrix.val[6,])/sum(mm.matrix.max[6,1:11])) * ((WC.sat[6] - WC.15[6]) + WC.15[6])/100
-  vol.moisture.60.70 = (sum(mm.matrix.val[7,])/sum(mm.matrix.max[7,1:11])) * ((WC.sat[7] - WC.15[7]) + WC.15[7])/100
-  vol.moisture.70.80 = (sum(mm.matrix.val[8,])/sum(mm.matrix.max[8,1:11])) * ((WC.sat[8] - WC.15[8]) + WC.15[8])/100
-  vol.moisture.80.90 = (sum(mm.matrix.val[9,])/sum(mm.matrix.max[9,1:11])) * ((WC.sat[9] - WC.15[9]) + WC.15[9])/100
-  vol.moisture.90.100 = (sum(mm.matrix.val[10,])/sum(mm.matrix.max[10,1:11])) * ((WC.sat[10] - WC.15[10]) + WC.15[10])/100
+  vol.moisture.0.10 = (sum(mm.matrix.val[1,])/sum(mm.matrix.max[1,1:11])) * ((WC.sat[1] - WC.15[1]) + WC.15[1])
+  vol.moisture.10.20 = (sum(mm.matrix.val[2,])/sum(mm.matrix.max[2,1:11])) * ((WC.sat[2] - WC.15[2]) + WC.15[2])
+  vol.moisture.20.30 = (sum(mm.matrix.val[3,])/sum(mm.matrix.max[3,1:11])) * ((WC.sat[3] - WC.15[3]) + WC.15[3])
+  vol.moisture.30.40 = (sum(mm.matrix.val[4,])/sum(mm.matrix.max[4,1:11])) * ((WC.sat[4] - WC.15[4]) + WC.15[4])
+  vol.moisture.40.50 = (sum(mm.matrix.val[5,])/sum(mm.matrix.max[5,1:11])) * ((WC.sat[5] - WC.15[5]) + WC.15[5])
+  vol.moisture.50.60 = (sum(mm.matrix.val[6,])/sum(mm.matrix.max[6,1:11])) * ((WC.sat[6] - WC.15[6]) + WC.15[6])
+  vol.moisture.60.70 = (sum(mm.matrix.val[7,])/sum(mm.matrix.max[7,1:11])) * ((WC.sat[7] - WC.15[7]) + WC.15[7])
+  vol.moisture.70.80 = (sum(mm.matrix.val[8,])/sum(mm.matrix.max[8,1:11])) * ((WC.sat[8] - WC.15[8]) + WC.15[8])
+  vol.moisture.80.90 = (sum(mm.matrix.val[9,])/sum(mm.matrix.max[9,1:11])) * ((WC.sat[9] - WC.15[9]) + WC.15[9])
+  vol.moisture.90.100 = (sum(mm.matrix.val[10,])/sum(mm.matrix.max[10,1:11])) * ((WC.sat[10] - WC.15[10]) + WC.15[10])
   
   # 2.6 Carry over moisture matrix to the next day
   mm <<- mm

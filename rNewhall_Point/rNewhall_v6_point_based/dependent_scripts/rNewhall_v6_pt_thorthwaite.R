@@ -38,7 +38,7 @@ Thornthwaite.Daily =  function(d, lat){
   l = day.hours / sum(month.hours)
 
   # final cacluation of PE
-  PE = (raw.PE * k * l) / 10 # convert from mm to cm per day 
+  PE = (raw.PE * k * l) /10 # convert from mm to cm per day 
   return(PE)
 }
 

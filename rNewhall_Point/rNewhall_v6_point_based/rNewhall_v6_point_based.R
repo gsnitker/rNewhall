@@ -168,7 +168,7 @@ modeled.moisture.plot = ggplot(pt.out.df, aes(x = Date)) +
   geom_line(aes(y = (SM_20_30cm), color = "Modeled SM 20-30cm")) +
   geom_line(aes(y = (SM_60_70cm), color = "Modeled SM 60-70cm")) +
   geom_line(aes(y = (SM_70_80cm), color = "Modeled SM 70-80cm")) +
- # ylim(c(0,1)) + 
+ ylim(c(0,.5)) + 
   theme_bw() + labs(title = "Modeled Soil Moisture at Marena, OK Mesonet Station - Interpolated MM",
                     subtitle = "rNewhall Pt v.6 ", x = "Date", y = "Soil Moisture (%)\n", color = "Depth") 
 modeled.moisture.plot
