@@ -3,7 +3,7 @@ options(warn=-1)
 # Met data
 met.data = read.csv(paste("./data/",site, "_mesonet_data_complete_cases.csv", sep = ""))
 met.data$DATE = as.Date(with(met.data, paste(YEAR, MONTH, DAY,sep="-")), "%Y-%m-%d") # create a date field
-met.data$RAIN = met.data$RAIN * 2.54 #convert inches to  cm
+met.data$RAIN = met.data$RAIN * 25.4 #convert inches to  mm
 met.data$RAIN[met.data$RAIN < 0] = 0 # for now, convert NAs to 0
 # Soil Data (all units in cm derived rates)
 soil.data = read.csv("./data/MesoSoilv1_3.csv")
