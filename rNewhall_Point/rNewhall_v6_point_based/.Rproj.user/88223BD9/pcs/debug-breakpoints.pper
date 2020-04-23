@@ -1,0 +1,51 @@
+{
+    "debugBreakpointsState" : {
+        "breakpoints" : [
+            {
+                "editor_line_number" : 7,
+                "editor_state" : 2,
+                "function_name" : "Thornthwaite",
+                "function_steps" : "",
+                "id" : 1,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 7,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "~/Dropbox/Smoke/UGA_Postdoc/R_scripts/rNewhall/rNewhall_v6_point_based/dependent_scripts/rNewhall_v6_pt_thorthwaite.R",
+                "state" : 2,
+                "type" : 0
+            },
+            {
+                "editor_line_number" : 148,
+                "editor_state" : 1,
+                "function_name" : "toplevel",
+                "function_steps" : "",
+                "id" : 2,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 148,
+                "needs_updated_steps" : true,
+                "package_name" : "",
+                "path" : "~/Dropbox/Smoke/UGA_Postdoc/R_scripts/rNewhall/rNewhall_v6_point_based/rNewhall_v6_point_based.R",
+                "state" : 1,
+                "type" : 1
+            },
+            {
+                "editor_line_number" : 65,
+                "editor_state" : 1,
+                "function_name" : "toplevel",
+                "function_steps" : "",
+                "id" : 3,
+                "is_package_breakpoint" : false,
+                "is_pending_debug_completion" : false,
+                "line_number" : 65,
+                "needs_updated_steps" : false,
+                "package_name" : "",
+                "path" : "~/Dropbox/Smoke/UGA_Postdoc/R_scripts/PRISM_Data_Download.R",
+                "state" : 1,
+                "type" : 1
+            }
+        ]
+    }
+}

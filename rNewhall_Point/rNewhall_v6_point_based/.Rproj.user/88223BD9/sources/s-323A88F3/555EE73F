@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587579028234.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "555EE73F",
+    "lastKnownWriteTime" : 1586981375,
+    "last_content_update" : 1586981375,
+    "path" : "~/Dropbox/Smoke/UGA_Postdoc/R_scripts/rNewhall/rNewhall_v6_point_based/dependent_scripts/rNewhall_v6_pt_MODIS_kc.R",
+    "project_path" : "dependent_scripts/rNewhall_v6_pt_MODIS_kc.R",
+    "properties" : {
+        "cursorPosition" : "18,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

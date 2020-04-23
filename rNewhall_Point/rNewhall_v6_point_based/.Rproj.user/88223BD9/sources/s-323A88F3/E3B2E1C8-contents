@@ -1,0 +1,81 @@
+# Download PRISM data from FTP, unzip, and compile into appropriate data format
+# G. Snitker
+# UGA Dept of Crop and SOil Sciences
+# 06/03/2019
+
+# Clear workspace
+rm(list=ls())
+
+# Required Libraries and settings
+library(RCurl)
+library(curl)
+library(parallel)
+library(raster)
+library(doParallel) 
+library(foreach) 
+cores = detectCores() -2 # Ste numbe rof cores to use if running in parallel
+h <- new_handle() # create new handle to customize curl 
+handle_setopt(h, connecttimeout = 900) # Set timeout options for curl 
+
+# # Part 1: Download
+# # Define function to loop through PRISM directories, download daily data, and unzip them
+# ##################################################
+# PRISM.Downloader = function(interval, type, year){
+#   
+# # Download filenames from PRISM FTP
+# url = paste("ftp://prism.nacse.org",interval, type, year,"", sep="/")  # Specify FTP for PRISM data ( be sure to indclude time interval ("daily"), and data type ("ppt"))
+# userpwd = "anonymous:ENTER EMAIL ADDRESS HERE"    # User name is anonymous and password is your email address 
+# filenames.raw = getURL(url, userpwd = userpwd, ftp.use.epsv = FALSE, dirlistonly = TRUE) 
+# filenames.nested = strsplit(filenames.raw,"\r\n")
+# filenames.list = unlist(filenames.nested)
+# 
+# # Use file names to download each day of the year via a loop
+# for (i in 1:length(filenames.list)){
+# curl_download(paste(url,filenames.list[i],sep = ""), destfile = paste("D:/Soil_Moisture_Wildfire_Project/Climate/PRISM/ZIP/", filenames.list[i],sep = ""), handle = h) # Specify destination folder for "zipped" PRISM data
+# unzip(paste("D:/Soil_Moisture_Wildfire_Project/Climate/PRISM/ZIP/", filenames.list[i],sep = ""), exdir= "D:/Soil_Moisture_Wildfire_Project/Climate/PRISM/UNZIPPED") # Specify destination folder for "unzipped" PRISM data
+#   }}
+# ##################################################
+# 
+# 
+# # Defined needed variables for download
+# interval = "daily"
+# type = "ppt"
+# year = 1981:2016
+# 
+# # Run PRISM.Downloader function in parallel
+# # Has issues with either Windows firewall or FTP being blocked
+# #cl = makeCluster(cores)
+# #clusterExport(cl, varlist = c("interval", "type", "year"))
+# #clusterEvalQ(cl, c(library(RCurl), library(curl)))
+# #ptm <- proc.time() # start timer
+# #parSapply(cl, year, PRISM.Downloader, interval = interval, type = type)
+# #stopCluster(cl)
+# #proc.time() - ptm # stop timer and display time
+# 
+# # Single core -- Very Slow -- but works
+# ptm <- proc.time()
+# sapply(year, PRISM.Downloader, interval = interval, type = type)
+# proc.time() - ptm
+
+
+# Part 2: Convert data to raster format
+daily.PRISM.stack = stack() # Initiate raster brick
+upload.path = "/Volumes/Elements/PRISM_data/an81/ppt/daily/2018/" #Specify upload path for PRISM .bil files *NOte currently a subset for experimnetal purposes
+PRISM.list = list.files(upload.path, pattern = "\\.bil$", full.names=T) # Select .bil files from directory
+study.area = shapefile("/Users/grantsnitker/Dropbox/Smoke/UGA_Postdoc/R_scripts/rNewhall/rNewhall_v5/data/oklahoma_extent.shp")# PRISM CONUS is too big to create a raster stack at this phase, so raster is clipped to study area; Load study area shapefile here
+
+ptm <- proc.time()
+for (i in 1:length(PRISM.list)){
+  daily.PRISM.rast = raster(PRISM.list[i]) # read it daily PRISM .bil from archive folder
+  daily.PRISM.rast.m = crop(daily.PRISM.rast, study.area) # clip to study area
+  daily.PRISM.stack = stack(daily.PRISM.stack,daily.PRISM.rast.m) # stack these data into a CONUS extent raster stack
+}
+proc.time() - ptm
+
+# Convert to rasterbrick for easier processing later
+daily.PRISM.prcp.brick = brick(daily.PRISM.stack)
+# Part 3: Svae outputs
+# Export raster as R object and as GeoTiff
+#save(daily.PRISM.tmean.stack, file = "/Volumes/FIRE_AUX/PRISM_daily_TMEAN_2018.R")
+#writeRaster(daily.PRISM.brick, filename = "/Volumes/FIRE_AUX/PRISM_daily_PRCP_2018.tif", format="GTiff", overwrite=TRUE)
+writeRaster(daily.PRISM.prcp.brick, filename = "/Users/grantsnitker/Dropbox/PRISM_daily_PRCP_2018.tif", format="GTiff", overwrite=TRUE)

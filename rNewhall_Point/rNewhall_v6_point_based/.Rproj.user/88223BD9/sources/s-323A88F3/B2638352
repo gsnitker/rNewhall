@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1585577543481.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1615262416",
+    "id" : "B2638352",
+    "lastKnownWriteTime" : 1587579296,
+    "last_content_update" : 1587579296118,
+    "path" : "~/Dropbox/Smoke/UGA_Postdoc/R_scripts/rNewhall/rNewhall_v6_point_based/dependent_scripts/rNewhall_v6_pt_thorthwaite.R",
+    "project_path" : "dependent_scripts/rNewhall_v6_pt_thorthwaite.R",
+    "properties" : {
+        "cursorPosition" : "40,60",
+        "scrollLine" : "13"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
