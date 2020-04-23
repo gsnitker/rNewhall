@@ -74,7 +74,7 @@ spinup.length = 1 # in years
 source("./dependent_scripts/rNewhall_v6_pt_soil_precip_data.R")
 
 # 1.5.1 Show site map
-site.map
+#site.map
 
 # 1.5.2 Load measure SM data if comparing\
 

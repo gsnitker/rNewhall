@@ -11,7 +11,9 @@ for (i in 1:num.rows){
   wc.15.mm = WC.15[i]
   wc.sat.mm = WC.sat[i]
   
-  mm.raw = c(rep((aws.mm/num.col),  times = num.col), (wc.sat.mm - wc.033.mm))
+  mm.raw = c(rep(aws.mm/10,  times = 10), 
+             round((((1-(bd.mm/2.65))*100) - wc.033.mm)*aws.mm/(wc.033.mm- wc.15.mm), 2))
+  #mm.raw = c(rep((aws.mm/num.col),  times = num.col), (wc.sat.mm - wc.033.mm))
   mm.max = append(mm.max, mm.raw)
 }
 
