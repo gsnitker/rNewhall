@@ -19,7 +19,7 @@ rNewhall.pt.daily =  function(d){
   current.met<<-subset(met.data.sub, DATE == d)
   
   # 2.1.1 extract daily precipitation
-  prcp = current.met$RAIN
+  prcp = current.met$RAIN * (1.05- kc[yday(d)]) # current apporximation for vegetation to intercep prcp
 
   
   # 2.1.2 calculate potential evapotranspiration using Thornthwaite (1948) equation

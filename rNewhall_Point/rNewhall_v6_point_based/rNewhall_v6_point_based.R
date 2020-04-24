@@ -66,6 +66,8 @@ row.depth = 10 #cm
 num.rows = 10 #number of rows 
 num.col = 10 # number of columns (not including satuartion column)
 
+interception.rate = .2
+
 # 1.4 Set date range for model (in years only)
 date.years = c(2008)
 spinup.length = 1 # in years
