@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1585590253297.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "115025488",
+    "id" : "FD83CBCE",
+    "lastKnownWriteTime" : 1587686273,
+    "last_content_update" : 1587686273291,
+    "path" : "~/Documents/GitHub/rNewhall/rNewhall_Point/rNewhall_v6_point_based/dependent_scripts/rNewhall_v6_pt_functions.R",
+    "project_path" : "dependent_scripts/rNewhall_v6_pt_functions.R",
+    "properties" : {
+        "cursorPosition" : "21,33",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1585579859037.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1062720442",
+    "id" : "AE41144C",
+    "lastKnownWriteTime" : 1587677281,
+    "last_content_update" : 1587677281342,
+    "path" : "~/Documents/GitHub/rNewhall/rNewhall_Point/rNewhall_v6_point_based/dependent_scripts/rNewhall_v6_pt_mm_setup.R",
+    "project_path" : "dependent_scripts/rNewhall_v6_pt_mm_setup.R",
+    "properties" : {
+        "cursorPosition" : "28,19",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

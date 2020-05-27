@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587676484154.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A3A1610B",
+    "lastKnownWriteTime" : 140200617443328,
+    "last_content_update" : 1587676484154,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "62021C91",
+        "caption" : "soil.data.sub",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=soil.data.sub&cache_key=62021C91",
+        "displayedObservations" : 5,
+        "environment" : "",
+        "expression" : "soil.data.sub",
+        "object" : "soil.data.sub",
+        "preview" : 0,
+        "totalObservations" : 5,
+        "variables" : 15
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
