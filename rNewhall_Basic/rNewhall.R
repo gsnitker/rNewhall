@@ -393,11 +393,11 @@ print(paste("Spin up completed in", iterations, "iterations", sep = " "))
 #soil.profile = rep(1, times = 64) # this is 64 (water fills entire profile) * 12 (months); Maximum amount of water possible
 out = lapply(1:12,rNewhall)
 
-moisture.calendar.matrix = matrix(moisture.calendar, nrow = 12, ncol = 30, byrow = TRUE)
-moisture.calendar.matrix.plot = melt(moisture.calendar.matrix)
-ggplot(moisture.calendar.matrix.plot, aes(x = Var2, y = Var1)) +
-  geom_raster(aes(fill=value)) +
-  scale_y_reverse(breaks=c(1:12),labels = c(1,2,3,4,5,6,7,8,9,10,11,12))
+# moisture.calendar.matrix = matrix(moisture.calendar, nrow = 12, ncol = 30, byrow = TRUE)
+# moisture.calendar.matrix.plot = melt(moisture.calendar.matrix)
+# ggplot(moisture.calendar.matrix.plot, aes(x = Var2, y = Var1)) +
+#   geom_raster(aes(fill=value)) +
+#   scale_y_reverse(breaks=c(1:12),labels = c(1,2,3,4,5,6,7,8,9,10,11,12))
 
 
 # Mid-month grid plot
@@ -413,7 +413,7 @@ grid.arrange(out[[1]]@midmonthplot,out[[1]]@endmonthplot,
              out[[10]]@midmonthplot,out[[10]]@endmonthplot,
              out[[11]]@midmonthplot,out[[11]]@endmonthplot,
              out[[12]]@midmonthplot,out[[12]]@endmonthplot,
-          top = textGrob("rNewhall Soil Profile Moisture Content for Athens, GA",
+          top = textGrob(paste("rNewhall Soil Profile Moisture Content for ", name, sep = ""),
                          gp=gpar(fontsize=16,font=2)))
 
 # Plot Moisture Conditions
@@ -429,8 +429,8 @@ grid.arrange(out[[1]]@moistplot,
              out[[10]]@moistplot,
              out[[11]]@moistplot,
              out[[12]]@moistplot, 
-             top = textGrob("rNewhall Soil Profile Moisture Conditions for Athens, GA",
-                            gp=gpar(fontsize=16,font=2)))
+             top = textGrob(paste("rNewhall Soil Profile Moisture Conditions for ", name, sep = ""),
+             gp=gpar(fontsize=16,font=2)))
 
 
 # Plot summer conditions
@@ -452,8 +452,8 @@ grid.arrange( out[[6]]@midmonthplot,
              out[[9]]@moistplot,
             ncol = 4,
             nrow = 4,
-             top = textGrob("rNewhall Soil Profile Summer Conditions for Athens, GA",
-                            gp=gpar(fontsize=16,font=2)))
+             top = textGrob(paste("rNewhall Soil Profile Summer Conditions for ", name, sep = ""),
+            gp=gpar(fontsize=16,font=2)))
 
 # Need to make sure water is filling up correctly with HP  
 
@@ -470,9 +470,8 @@ grid.arrange(out[[1]]@endmonthplot,
              out[[10]]@endmonthplot,
              out[[11]]@endmonthplot,
              out[[12]]@endmonthplot,
-             top = textGrob("rNewhall-Basic Soil Profile Moisture Content for Marena Mesonet Site, OK\nJan 2009 - Dec 2009\n",
-                            gp=gpar(fontsize=16,font=2)))
-
+             top = textGrob(paste("rNewhall-Basic Soil Profile Moisture Content for ", name, sep = ""),
+             gp=gpar(fontsize=16,font=2)))
 
 
 # Next steps:
