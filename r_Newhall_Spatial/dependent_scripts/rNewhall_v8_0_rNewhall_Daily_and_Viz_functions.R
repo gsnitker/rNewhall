@@ -99,22 +99,84 @@ return(cell.results)
 }
 
 
+rNewhall.output = output
+rNewhall.mode = "point"
+start.date = "2016-1-01"
+end.date = "2016-12-31"
+depth.top = 0
+depth.bottom = 10
+plot = T
+export= F
+
 # rNewhall visualization function
-rNewhall.vis = function(rNewhall.output, start.date, end.date, depth.top, depth.bottom, plot.raster = T, export.raster = T){
+rNewhall.vis = function(rNewhall.output= output, rNewhall.mode= "point", start.date= "2016-1-01", end.date= "2016-12-31", depth.top= 0, depth.bottom= 10, plot = T, export = F){
   # Part 4: Map Results ### ---------------------------------------------------------
   # 4.1 Create a map of the results
   # 4.1.1 Query the output s4 object to build a raster from the results
   ptm <- proc.time() # start time
-
-
-  
   # function to extract the desired values
   extract.values = function(x,y){
     out = slot(rNewhall.output.sub[[x]][[y]], paste("moisture.",depth.top,".",depth.bottom,sep = ""))
     return(out)
   }
   
- 
+  if (rNewhall.mode == "point"){
+    all.colors = colors()
+    results.df.raw <<- data.frame()
+    dates = unique(seq(match(c(as.Date(start.date)),date.range),match(c(as.Date(end.date)),date.range)))
+    rNewhall.results.data.frame <<- data.frame("Day" = 1:length(dates))
+    for (i in 1:length(rNewhall.output)){
+    rNewhall.output.sub = rNewhall.output[[i]]
+   
+    vector.out = vector()
+    # create dataframe for querying the results. This will be fed to mapply
+    dates = unique(seq(match(c(as.Date(start.date)),date.range),match(c(as.Date(end.date)),date.range)))
+    depths  = seq(depth.top,depth.bottom, by = row.depth)
+    
+    # subset the cells that are within the study area and set the order for filling teh raster
+    chunk = process.chunks[i,]
+    study.area.cells= raster(extent(chunk), resolution = c(0.008333333, 0.008333333), crs = proj4string(chunk)) %>% rasterToPolygons() 
+    study.area.cells$cell = 1:length(study.area.cells)
+    study.area.cells = study.area.cells[study.area,]
+    study.area.cells = study.area.cells
+    cells.chunk = study.area.cells$cell
+    cells = 1:length(rNewhall.output.sub)
+    query.cells = rep(cells, each = length(dates)) 
+    query.dates = rep(dates,length(cells))
+    
+    # Run extraction to build vector from whihc raster will be generated
+    df <- as.data.frame(mapply(extract.values, query.cells, query.dates))
+    results.df.raw <<- rbind(results.df.raw, df)
+   }
+    results.df <<- split(results.df.raw, rep(1:length(study.area),each=length(dates)))
+
+     for (k in 1:length(results.df)){
+       rNewhall.results.df = as.data.frame(unlist(results.df[k]))
+       rNewhall.results.df$date = seq(as.Date(start.date), as.Date(end.date), "days" )
+       rNewhall.results.df$lat = study.area@coords[k,2]
+       rNewhall.results.df$long = study.area@coords[k,1]
+       colnames(rNewhall.results.df) = c("modeled_SM", "date", "lat", "long")
+       row.names(rNewhall.results.df) <- NULL
+       rNewhall.results.data.frame = cbind(rNewhall.results.data.frame, rNewhall.results.df)
+    
+     if (plot == T){
+     print(ggplot(rNewhall.results.df, aes(x = date)) +
+             geom_line(aes(y = (modeled_SM), color = paste("Depth:", depth.top, "-", depth.bottom, "cm"))) +
+             ylim(c(0,.5)) +
+    
+             scale_color_manual(values = c(all.colors[sample(610:644, 1, replace=TRUE)])) +
+             theme_bw() + labs(title = paste("rNewhall Modeled Soil Moisture", sep = ""),
+                               subtitle =  paste("Dates: ", start.date, " - ", end.date, "\nDepth: ", depth.top, " - ", depth.bottom, "cm\nType: Mean ",output.type, "\nLat: ", rNewhall.results.df$lat[1], "\nLong: ",rNewhall.results.df$long[1], sep = ""), x = "\nDate", y = paste(output.type,"\n"), color = ""))
+     }
+     }
+     if (export == T){
+       save.file.dir = tk_choose.dir()
+       write.csv( rNewhall.results.data.frame, file = paste(save.file.dir,"/rNewhall_results_", study.area.name, ".csv", sep =""))
+     }
+  }
+  
+  
+  if (rNewhall.mode == "spatial"){
   output.raster.list = list()
   pb = invisible(txtProgressBar(min = 0, max = length(rNewhall.output), initial = 0, style =3)) # create progress bar
   for(i in 1:length(rNewhall.output)){
@@ -169,14 +231,14 @@ rNewhall.vis = function(rNewhall.output, start.date, end.date, depth.top, depth.
  names(rNewhall.results.stack) =  seq(as.Date(start.date), as.Date(end.date), "days" ) # need to see if this still breaks
  rNewhall.results.stack <<-  rNewhall.results.stack 
   
-  if (plot.raster == T){
+  if (plot == T){
     plot(calc(rNewhall.results.stack, mean), main = "rNewhall results with study area overlay", zlim=c(0,.5),sub = paste("Dates: ", start.date, " - ", end.date, "        Depth: ", depth.top, " - ", depth.bottom, "cm        Type: Mean ",output.type, sep = ""))
     plot(study.area, add =T)
   }
 
-  if (export.raster == T){
+  if (export == T){
   save.file.dir = tk_choose.dir()
-  writeRaster(rNewhall.results.stack, filename = paste(save.file.dir,"/rNewhall_results", study.area.name, ".tif", sep =""), format = "GTiff", overwrite = T)
+  writeRaster(rNewhall.results.stack, filename = paste(save.file.dir,"/rNewhall_results_", study.area.name, ".tif", sep =""), format = "GTiff", overwrite = T)
   }
 
   time = proc.time() - ptm
@@ -184,5 +246,6 @@ rNewhall.vis = function(rNewhall.output, start.date, end.date, depth.top, depth.
   #return(cat(paste("\nrNewhall visualization complete for study area. \nTotal Time: ",mins, " mins\n", sep = "")))
   cat(paste("\nrNewhall visualization complete for study area. \nTotal Time: ",mins, " mins\n", sep = ""))
 
+  }
 }
 
