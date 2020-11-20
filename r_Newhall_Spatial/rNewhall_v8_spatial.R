@@ -15,9 +15,12 @@ cores = detectCores() - 1 #recommended that 1-2 cores are reserved for other CPU
 #####################
 # 2. Set user inputs
 # 2.1 rNewhall Mode
-rNewhall.mode = "spatial" # options: "spatial" or "point-based" (output function still to be developed)
+rNewhall.mode = "spatial" # options: "spatial" or "point" (output function still to be developed)
 # 2.2 rNewhall study area (shapefile only) * Note: this is a small test area in the Red River Watersehd. Only teh Red River Wtaershed and the northern porton of teh Rio Grande have been pre processed.
-study.area = shapefile("./data/Red_river_watershed_test_EPSG4269.shp") #if rNewhall.mode = "spatial", input must by a polygon; if rNewhall.mode = "point-based", input must by point(s) 
+study.area = shapefile("./data/Red_river_watershed_points_EPSG4269.shp") #if rNewhall.mode = "spatial", input must by a polygon; if rNewhall.mode = "point", input must by point(s) 
+# testing points "./data/Red_river_watershed_points_EPSG4269.shp"
+# testing poly "./data/Red_river_watershed_test_EPSG4269.shp"
+study.area.name = "testing" # this is the name used to save outputs
 # 2.3 Date range to model (currently only offered in 1 year intervals)
 date.years = c(2016) # only 2016 pre-processed as of now
 # 2.4 Length of model spin-up (years)
@@ -90,6 +93,6 @@ save(output, file = "./output/red_river_test.Rdata")
 
 #####################
 # 6. Process, visualize, and export results (*Note: only 10cm intervals can be visualized and exported right now)
-rNewhall.vis(rNewhall.output = output, start.date = "2016-1-01", end.date = "2016-12-31", depth.top = 0, depth.bottom = 10, plot.raster = T, export.raster = F) 
+rNewhall.vis(rNewhall.output = output, rNewhall.mode = "point", start.date = "2016-1-01", end.date = "2016-12-31", depth.top = 0, depth.bottom = 10, plot = T, export= T) 
 #####################
 
